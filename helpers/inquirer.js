@@ -66,13 +66,13 @@ const leerInput = async (message) => {
     return desc;
 }
 
-const Borrartask = async (tareas = []) => {
+const Listar_lugares = async (lugares = []) => {
 
-    const choices = tareas.map((tarea, i) => {
+    const choices = lugares.map((lugar, i) => {
         const idx = `${i + 1}.`.red;
         return {
-            value: tarea.id,
-            name: `${idx} ${tarea.desc}`
+            value: lugar.id,
+            name: `${idx} ${lugar.nombre}`
         }
     });
     choices.unshift({
@@ -83,7 +83,7 @@ const Borrartask = async (tareas = []) => {
         {
             type: 'list',
             name: 'id_task',
-            message: 'Borrar'.bgRed,
+            message: 'Seleccione lugar'.red,
             choices
         }
     ]
@@ -92,47 +92,10 @@ const Borrartask = async (tareas = []) => {
 
 }
 
-const confirmar = async (message) => {
-
-    const questionConfirm = [
-        {
-            type: 'confirm',
-            name: 'ok',
-            message
-        }
-    ]
-    const { ok } = await inquirer.prompt(questionConfirm);
-    return ok;
-}
-
-const Checklist = async (tareas = []) => {
-
-    const choices = tareas.map((tarea, i) => {
-        const idx = `${i + 1}.`.red;
-        return {
-            value: tarea.id,
-            name: `${idx} ${tarea.desc}`,
-            checked: (tarea.completadoEn) ? true : false
-        }
-    });
-    const preguntas = [
-        {
-            type: 'checkbox',
-            name: 'ids',
-            message: 'Seleccion'.blue,
-            choices
-        }
-    ]
-    const { ids } = await inquirer.prompt(preguntas);
-    return ids;
-
-}
 
 export {
     inquirerMenu,
     pausar,
     leerInput,
-    Checklist,
-    Borrartask,
-    confirmar
+    Listar_lugares
 }
